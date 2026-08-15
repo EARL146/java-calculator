@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout — Hito House</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav class="navbar scrolled" id="navbar">
+    <div class="container">
+        <a href="index.html" class="navbar-brand">
+            <div class="brand-logo">🐟</div>
+            <div class="brand-text">
+                <span class="brand-name">Hito House</span>
+                <span class="brand-tagline">Premium Catfish</span>
+            </div>
+        </a>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="menu.html">Menu</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+        <button class="nav-cart-btn" onclick="toggleCart()">
+            🛒 Cart
+            <span class="cart-count" id="cartCount">0</span>
+        </button>
+        <button class="hamburger" onclick="toggleMobileNav()">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+</nav>
+
+<div class="mobile-nav" id="mobileNav">
+    <button class="mobile-nav-close" onclick="toggleMobileNav()">✕</button>
+    <a href="index.html">Home</a>
+    <a href="menu.html">Menu</a>
+    <a href="index.html#contact">Contact</a>
+</div>
+
+<!-- CHECKOUT PAGE -->
+<div class="checkout-page">
+    <div class="container">
+
+        <!-- Page title -->
+        <div style="margin-bottom:2rem;">
+            <h2 style="color:var(--color-primary);font-family:var(--font-heading);">Checkout</h2>
+            <p style="color:var(--color-text-muted);">
+                Review your order and fill in delivery details.
+            </p>
+        </div>
+
+        <!-- Empty cart warning -->
+        <div id="emptyCartWarning" style="display:none;text-align:center;padding:4rem;background:white;border-radius:20px;border:1px solid var(--color-border);">
+            <div style="font-size:3rem;margin-bottom:1rem;">🛒</div>
+            <h3 style="color:var(--color-primary);margin-bottom:1rem;">Your cart is empty</h3>
+            <p style="color:var(--color-text-muted);margin-bottom:2rem;">Add some Hito dishes before checking out!</p>
+            <a href="menu.html" class="btn btn-primary">Browse Our Menu</a>
+        </div>
+
+        <!-- Checkout grid (shown only when cart has items) -->
+        <div class="checkout-grid" id="checkoutContent">
+
+            <!-- LEFT: Checkout Form -->
+            <div class="form-card">
+                <h3 style="color:var(--color-primary);margin-bottom:1.5rem;">📦 Delivery Details</h3>
+
+                <form id="checkoutForm" onsubmit="submitOrder(event)">
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="custName">Full Name *</label>
+                            <input type="text" id="custName" name="customerName"
+                                   placeholder="e.g. Juan Dela Cruz" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="custContact">Contact Number *</label>
+                            <input type="tel" id="custContact" name="contactNumber"
+                                   placeholder="09xxxxxxxxx" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="custAddress">Delivery Address *</label>
+                        <textarea id="custAddress" name="address"
+                                  placeholder="House no., Street, Barangay, City" required
+                                  style="min-height:90px;"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="orderNotes">Order Notes <span style="font-weight:400;color:var(--color-text-muted);">(optional)</span></label>
+                        <textarea id="orderNotes" name="notes"
+                                  placeholder="e.g. Extra sawsawan, No spice, etc."
+                                  style="min-height:80px;"></textarea>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button type="submit" class="btn btn-primary btn-lg"
+                            style="width:100%;justify-content:center;margin-top:.5rem;"
+                            id="placeOrderBtn">
+                        Place Order 🐟
+                    </button>
+
+                    <p style="font-size:.82rem;color:var(--color-text-muted);text-align:center;margin-top:.8rem;">
+                        By placing an order, you agree to our delivery policy.
+                    </p>
+                </form>
+            </div>
+
+            <!-- RIGHT: Order Summary -->
+            <div class="order-summary">
+                <h3>🧾 Order Summary</h3>
+
+                <!-- Items list (filled by checkout.js) -->
+                <div id="summaryItemsList">
+                    <!-- Rendered dynamically -->
+                </div>
+
+                <!-- Totals -->
+                <div style="margin-top:1rem;padding-top:1rem;border-top:2px solid var(--color-border);">
+                    <div class="summary-total">
+                        <span>Total</span>
+                        <span id="summaryTotal">₱0.00</span>
+                    </div>
+                </div>
+
+                <!-- Payment note -->
+                <div style="
+                    margin-top:1.5rem;
+                    background:var(--color-cream);
+                    border-radius:12px;
+                    padding:1rem;
+                    border-left:4px solid var(--color-accent);
+                ">
+                    <p style="font-size:.85rem;color:var(--color-text-muted);">
+                        💰 <strong style="color:var(--color-text);">Cash on Delivery</strong><br>
+                        Pay when your order arrives. No online payment needed.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- SUCCESS MODAL -->
+<div id="successModal" style="
+    display:none;
+    position:fixed;inset:0;
+    background:rgba(0,0,0,.6);
+    z-index:2000;
+    align-items:center;
+    justify-content:center;
+    padding:1rem;
+">
+    <div style="
+        background:white;
+        border-radius:24px;
+        padding:3rem;
+        max-width:460px;
+        width:100%;
+        text-align:center;
+        box-shadow:0 20px 60px rgba(0,0,0,.3);
+    ">
+        <div style="font-size:4rem;margin-bottom:1rem;">🎉</div>
+        <h2 style="color:var(--color-primary);margin-bottom:1rem;">Order Placed!</h2>
+        <p style="color:var(--color-text-muted);margin-bottom:.5rem;">
+            Thank you for your order! We will start preparing your Hito right away.
+        </p>
+        <p id="successOrderId" style="
+            color:var(--color-accent);
+            font-weight:700;
+            font-size:1.1rem;
+            margin-bottom:2rem;
+        "></p>
+        <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+            <a href="menu.html" class="btn btn-outline">Browse More</a>
+            <a href="index.html" class="btn btn-primary">Go Home</a>
+        </div>
+    </div>
+</div>
+
+<!-- Cart Sidebar (reused for quick cart access) -->
+<div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+<div class="cart-sidebar" id="cartSidebar">
+    <div class="cart-header">
+        <h3>🛒 Your Cart</h3>
+        <button class="cart-close-btn" onclick="toggleCart()">✕</button>
+    </div>
+    <div class="cart-items" id="cartItemsList"></div>
+    <div class="cart-footer" id="cartFooter">
+        <div class="cart-subtotal"><span>Subtotal</span><span id="cartSubtotal">₱0.00</span></div>
+        <div class="cart-total"><span>Total</span><span id="cartTotal">₱0.00</span></div>
+        <a href="checkout.html" class="btn btn-primary" style="width:100%;justify-content:center;">
+            Proceed to Checkout →
+        </a>
+    </div>
+</div>
+
+<div class="toast-container" id="toastContainer"></div>
+
+<script src="js/cart.js"></script>
+<script src="js/main.js"></script>
+<script src="js/checkout.js"></script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        updateCartUI();
+        renderCheckoutSummary();
+    });
+</script>
+
+</body>
+</html>

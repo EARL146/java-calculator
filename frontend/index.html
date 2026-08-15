@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hito House — Premium Catfish in Cebu</title>
+    <meta name="description" content="Hito House — Fresh, Fried, and Grilled Catfish. The best Hito experience in Cebu.">
+
+    <!-- Google Fonts: Playfair Display (headings) + Inter (body) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- ================================================================
+     NAVIGATION
+================================================================ -->
+<nav class="navbar" id="navbar">
+    <div class="container">
+        <!-- Brand -->
+        <a href="index.html" class="navbar-brand">
+            <div class="brand-logo">🐟</div>
+            <div class="brand-text">
+                <span class="brand-name">Hito House</span>
+                <span class="brand-tagline">Premium Catfish</span>
+            </div>
+        </a>
+
+        <!-- Desktop Nav Links -->
+        <ul class="nav-links">
+            <li><a href="index.html" class="active">Home</a></li>
+            <li><a href="menu.html">Menu</a></li>
+            <li><a href="#why-us">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+
+        <!-- Cart Button -->
+        <button class="nav-cart-btn" id="cartToggleBtn" onclick="toggleCart()">
+            🛒 Cart
+            <span class="cart-count" id="cartCount">0</span>
+        </button>
+
+        <!-- Hamburger (mobile) -->
+        <button class="hamburger" id="hamburgerBtn" onclick="toggleMobileNav()">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+</nav>
+
+<!-- Mobile Nav -->
+<div class="mobile-nav" id="mobileNav">
+    <button class="mobile-nav-close" onclick="toggleMobileNav()">✕</button>
+    <a href="index.html" onclick="toggleMobileNav()">Home</a>
+    <a href="menu.html" onclick="toggleMobileNav()">Menu</a>
+    <a href="#why-us" onclick="toggleMobileNav()">About</a>
+    <a href="#contact" onclick="toggleMobileNav()">Contact</a>
+</div>
+
+<!-- ================================================================
+     HERO SECTION
+================================================================ -->
+<section class="hero" id="hero">
+    <div class="hero-pattern"></div>
+    <div class="container">
+        <!-- Left: Content -->
+        <div class="hero-content">
+            <div class="hero-badge">
+                ⭐ Cebu's Favorite Hito
+            </div>
+
+            <h1 class="hero-title">
+                Fresh &amp; Delicious
+                <span>Hito Dishes</span>
+                Delivered to You
+            </h1>
+
+            <p class="hero-desc">
+                From fresh pond-raised catfish to perfectly fried and grilled Hito dishes —
+                we bring the richest flavors of Cebu seafood straight to your table.
+            </p>
+
+            <div class="hero-actions">
+                <a href="menu.html" class="btn btn-primary btn-lg">
+                    🍽️ View Our Menu
+                </a>
+                <a href="#contact" class="btn btn-secondary btn-lg">
+                    📍 Find Us
+                </a>
+            </div>
+
+            <div class="hero-stats">
+                <div class="hero-stat">
+                    <strong>500+</strong>
+                    <span>Happy Customers</span>
+                </div>
+                <div class="hero-stat">
+                    <strong>15+</strong>
+                    <span>Hito Dishes</span>
+                </div>
+                <div class="hero-stat">
+                    <strong>5★</strong>
+                    <span>Rating</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right: Visual -->
+        <div class="hero-visual">
+            <div class="hero-img-wrapper">
+                <!-- Replace src with a real food photo when available -->
+                <div class="hero-img-placeholder">
+                    <span class="fish-icon">🐟</span>
+                    <span>Fresh Hito Photo</span>
+                    <small>Replace with actual image</small>
+                </div>
+            </div>
+
+            <!-- Floating info cards -->
+            <div class="hero-float-card card-1">
+                <div class="icon">🔥</div>
+                <div>
+                    <strong>Freshly Cooked</strong>
+                    <small>Made to order</small>
+                </div>
+            </div>
+
+            <div class="hero-float-card card-2">
+                <div class="icon">🚚</div>
+                <div>
+                    <strong>Fast Delivery</strong>
+                    <small>Within Cebu City</small>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ================================================================
+     FEATURED PRODUCTS
+================================================================ -->
+<section class="section featured-products" id="featured">
+    <div class="container">
+        <div class="text-center">
+            <span class="section-label">Our Best Sellers</span>
+            <h2 class="section-title">Featured Hito Dishes</h2>
+            <p class="section-subtitle">
+                Handpicked favorites from our menu — fresh, flavorful, and cooked to perfection.
+            </p>
+        </div>
+
+        <!-- Products will be loaded here by products.js -->
+        <div class="products-grid" id="featuredProductsGrid">
+            <!-- Skeleton loaders while fetching -->
+            <div class="product-card">
+                <div class="product-img skeleton" style="height:220px;"></div>
+                <div class="product-body">
+                    <div class="skeleton" style="height:14px;width:60%;margin-bottom:.5rem;border-radius:4px;"></div>
+                    <div class="skeleton" style="height:20px;margin-bottom:.5rem;border-radius:4px;"></div>
+                    <div class="skeleton" style="height:40px;margin-bottom:1rem;border-radius:4px;"></div>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-img skeleton" style="height:220px;"></div>
+                <div class="product-body">
+                    <div class="skeleton" style="height:14px;width:60%;margin-bottom:.5rem;border-radius:4px;"></div>
+                    <div class="skeleton" style="height:20px;margin-bottom:.5rem;border-radius:4px;"></div>
+                    <div class="skeleton" style="height:40px;margin-bottom:1rem;border-radius:4px;"></div>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-img skeleton" style="height:220px;"></div>
+                <div class="product-body">
+                    <div class="skeleton" style="height:14px;width:60%;margin-bottom:.5rem;border-radius:4px;"></div>
+                    <div class="skeleton" style="height:20px;margin-bottom:.5rem;border-radius:4px;"></div>
+                    <div class="skeleton" style="height:40px;margin-bottom:1rem;border-radius:4px;"></div>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-img skeleton" style="height:220px;"></div>
+                <div class="product-body">
+                    <div class="skeleton" style="height:14px;width:60%;margin-bottom:.5rem;border-radius:4px;"></div>
+                    <div class="skeleton" style="height:20px;margin-bottom:.5rem;border-radius:4px;"></div>
+                    <div class="skeleton" style="height:40px;margin-bottom:1rem;border-radius:4px;"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center" style="margin-top:3rem;">
+            <a href="menu.html" class="btn btn-dark btn-lg">View Full Menu →</a>
+        </div>
+    </div>
+</section>
+
+<!-- ================================================================
+     WHY CHOOSE US
+================================================================ -->
+<section class="section why-us" id="why-us">
+    <div class="container">
+        <div class="text-center">
+            <span class="section-label">Why Hito House</span>
+            <h2 class="section-title">Quality You Can Taste</h2>
+            <p class="section-subtitle">
+                We are passionate about delivering the freshest and most delicious Hito experience possible.
+            </p>
+        </div>
+
+        <div class="why-us-grid">
+            <div class="why-card">
+                <div class="why-icon">🐟</div>
+                <h3>Pond-Fresh Hito</h3>
+                <p>Our catfish comes directly from local freshwater ponds — guaranteed fresh, never frozen.</p>
+            </div>
+            <div class="why-card">
+                <div class="why-icon">👨‍🍳</div>
+                <h3>Expert Cooking</h3>
+                <p>Each dish is prepared by experienced cooks using traditional Cebuano flavors and recipes.</p>
+            </div>
+            <div class="why-card">
+                <div class="why-icon">⚡</div>
+                <h3>Fast Delivery</h3>
+                <p>We cook your order fresh and deliver it quickly within Cebu City to ensure maximum quality.</p>
+            </div>
+            <div class="why-card">
+                <div class="why-icon">💰</div>
+                <h3>Fair Prices</h3>
+                <p>Premium quality doesn't have to break the bank. We offer the best value for every dish.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ================================================================
+     TESTIMONIALS
+================================================================ -->
+<section class="section testimonials" id="testimonials">
+    <div class="container">
+        <div class="text-center">
+            <span class="section-label">What Customers Say</span>
+            <h2 class="section-title">Loved by Cebuanos</h2>
+        </div>
+
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <div class="stars">★★★★★</div>
+                <p class="testimonial-text">
+                    "Suuuper sarap! The Fried Hito here is the crispiest and most flavorful I've ever had.
+                    My whole family orders every weekend now."
+                </p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">JD</div>
+                    <div>
+                        <div class="author-name">Juan Dela Cruz</div>
+                        <div class="author-location">Mandaue City</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="testimonial-card">
+                <div class="stars">★★★★★</div>
+                <p class="testimonial-text">
+                    "Grilled Hito is so good — perfectly seasoned. Delivery was fast and food arrived
+                    still hot. Highly recommended sa tanan!"
+                </p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">MS</div>
+                    <div>
+                        <div class="author-name">Maria Santos</div>
+                        <div class="author-location">Cebu City</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="testimonial-card">
+                <div class="stars">★★★★★</div>
+                <p class="testimonial-text">
+                    "Best Hito meal I've had in Cebu. The portions are generous and the price is very
+                    reasonable. Will definitely order again!"
+                </p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">RC</div>
+                    <div>
+                        <div class="author-name">Rafael Castillo</div>
+                        <div class="author-location">Talisay City</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ================================================================
+     CONTACT SECTION
+================================================================ -->
+<section class="section contact" id="contact">
+    <div class="container">
+        <div class="text-center">
+            <span class="section-label">Get In Touch</span>
+            <h2 class="section-title">Contact &amp; Location</h2>
+        </div>
+
+        <div class="contact-grid">
+            <!-- Left: Info -->
+            <div class="contact-info">
+                <h3>Visit or Call Us</h3>
+
+                <div class="contact-item">
+                    <div class="contact-item-icon">📍</div>
+                    <div class="contact-item-text">
+                        <strong>Address</strong>
+                        <span>123 Catfish Street, Brgy. Punta Princesa, Cebu City, 6000</span>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <div class="contact-item-icon">📞</div>
+                    <div class="contact-item-text">
+                        <strong>Phone / Viber</strong>
+                        <span>0912 345 6789</span>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <div class="contact-item-icon">📘</div>
+                    <div class="contact-item-text">
+                        <strong>Facebook</strong>
+                        <span>facebook.com/HitoHouseCebu</span>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <div class="contact-item-icon">🕐</div>
+                    <div class="contact-item-text">
+                        <strong>Business Hours</strong>
+                        <span>Mon–Sun: 9:00 AM – 8:00 PM</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right: Contact Form -->
+            <div class="form-card">
+                <h3 style="color:var(--color-primary);margin-bottom:1.5rem;">Send Us a Message</h3>
+
+                <form id="contactForm" onsubmit="submitContact(event)">
+                    <div class="form-group">
+                        <label for="contactName">Your Name *</label>
+                        <input type="text" id="contactName" name="name" placeholder="e.g. Juan Dela Cruz" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="contactPhone">Phone or Email *</label>
+                        <input type="text" id="contactPhone" name="contact" placeholder="09xxxxxxxxx or email@example.com" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="contactMessage">Message *</label>
+                        <textarea id="contactMessage" name="message" placeholder="Your question or message..." required></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" style="width:100%;">
+                        Send Message ✉️
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ================================================================
+     FOOTER
+================================================================ -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <!-- Brand -->
+            <div class="footer-brand">
+                <div class="navbar-brand">
+                    <div class="brand-logo">🐟</div>
+                    <div class="brand-text">
+                        <span class="brand-name">Hito House</span>
+                        <span class="brand-tagline">Premium Catfish</span>
+                    </div>
+                </div>
+                <p style="margin-top:1rem;">
+                    Cebu's home for fresh, flavorful Hito dishes. From pond to plate — we serve only the best.
+                </p>
+            </div>
+
+            <!-- Quick Links -->
+            <div>
+                <h4>Quick Links</h4>
+                <ul class="footer-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="menu.html">Menu</a></li>
+                    <li><a href="checkout.html">Checkout</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+
+            <!-- Categories -->
+            <div>
+                <h4>Categories</h4>
+                <ul class="footer-links">
+                    <li><a href="menu.html?category=Fresh+Hito">Fresh Hito</a></li>
+                    <li><a href="menu.html?category=Fried+Hito">Fried Hito</a></li>
+                    <li><a href="menu.html?category=Grilled+Hito">Grilled Hito</a></li>
+                    <li><a href="menu.html?category=Hito+Meals">Hito Meals</a></li>
+                    <li><a href="menu.html?category=Hito+Specials">Hito Specials</a></li>
+                </ul>
+            </div>
+
+            <!-- Contact -->
+            <div>
+                <h4>Contact</h4>
+                <ul class="footer-links">
+                    <li><a href="tel:09123456789">📞 0912 345 6789</a></li>
+                    <li><a href="#">📘 Facebook Page</a></li>
+                    <li><a href="#">📍 Cebu City</a></li>
+                    <li><a href="#">🕐 9AM – 8PM Daily</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2025 Hito House. All rights reserved. | Built with ❤️ in Cebu</p>
+        </div>
+    </div>
+</footer>
+
+<!-- ================================================================
+     CART SIDEBAR
+================================================================ -->
+<div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+
+<div class="cart-sidebar" id="cartSidebar">
+    <div class="cart-header">
+        <h3>🛒 Your Cart</h3>
+        <button class="cart-close-btn" onclick="toggleCart()">✕</button>
+    </div>
+
+    <div class="cart-items" id="cartItemsList">
+        <!-- Cart items rendered by cart.js -->
+    </div>
+
+    <div class="cart-footer" id="cartFooter">
+        <div class="cart-subtotal">
+            <span>Subtotal</span>
+            <span id="cartSubtotal">₱0.00</span>
+        </div>
+        <div class="cart-total">
+            <span>Total</span>
+            <span id="cartTotal">₱0.00</span>
+        </div>
+        <a href="checkout.html" class="btn btn-primary" style="width:100%;justify-content:center;">
+            Proceed to Checkout →
+        </a>
+    </div>
+</div>
+
+<!-- Toast notifications -->
+<div class="toast-container" id="toastContainer"></div>
+
+<!-- ================================================================
+     JAVASCRIPT
+================================================================ -->
+<script src="js/cart.js"></script>
+<script src="js/products.js"></script>
+<script src="js/main.js"></script>
+
+<script>
+    // Load featured products on the home page (max 4)
+    document.addEventListener('DOMContentLoaded', () => {
+        loadFeaturedProducts();
+        updateCartUI();
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu — Hito House</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav class="navbar scrolled" id="navbar">
+    <div class="container">
+        <a href="index.html" class="navbar-brand">
+            <div class="brand-logo">🐟</div>
+            <div class="brand-text">
+                <span class="brand-name">Hito House</span>
+                <span class="brand-tagline">Premium Catfish</span>
+            </div>
+        </a>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="menu.html" class="active">Menu</a></li>
+            <li><a href="index.html#why-us">About</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+        <button class="nav-cart-btn" onclick="toggleCart()">
+            🛒 Cart
+            <span class="cart-count" id="cartCount">0</span>
+        </button>
+        <button class="hamburger" onclick="toggleMobileNav()">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+</nav>
+
+<!-- Mobile Nav -->
+<div class="mobile-nav" id="mobileNav">
+    <button class="mobile-nav-close" onclick="toggleMobileNav()">✕</button>
+    <a href="index.html" onclick="toggleMobileNav()">Home</a>
+    <a href="menu.html" onclick="toggleMobileNav()">Menu</a>
+    <a href="index.html#why-us" onclick="toggleMobileNav()">About</a>
+    <a href="index.html#contact" onclick="toggleMobileNav()">Contact</a>
+</div>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+    <div class="container">
+        <h1>Our Menu</h1>
+        <p>Fresh Hito dishes made to order — choose your favorite</p>
+    </div>
+</div>
+
+<!-- MENU SECTION -->
+<section class="section" style="background:var(--color-cream);">
+    <div class="container">
+
+        <!-- Category Filters -->
+        <div class="filter-bar" id="filterBar">
+            <button class="filter-btn active" onclick="filterProducts('all', this)">All</button>
+            <button class="filter-btn" onclick="filterProducts('Fresh Hito', this)">🐟 Fresh Hito</button>
+            <button class="filter-btn" onclick="filterProducts('Fried Hito', this)">🍳 Fried Hito</button>
+            <button class="filter-btn" onclick="filterProducts('Grilled Hito', this)">🔥 Grilled Hito</button>
+            <button class="filter-btn" onclick="filterProducts('Hito Meals', this)">🍱 Hito Meals</button>
+            <button class="filter-btn" onclick="filterProducts('Hito Specials', this)">⭐ Hito Specials</button>
+        </div>
+
+        <!-- Error message (hidden by default) -->
+        <div id="menuError" class="error-state" style="display:none;">
+            <p>⚠️ Could not load products. Make sure the backend is running on port 8080.</p>
+            <p style="font-size:.85rem;margin-top:.5rem;">Showing sample products instead.</p>
+        </div>
+
+        <!-- Products Grid -->
+        <div class="products-grid" id="menuProductsGrid">
+            <!-- Loading state -->
+            <div class="loading-state">
+                <div class="spinner"></div>
+                <p>Loading products...</p>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- PRODUCT DETAIL MODAL -->
+<div id="productModal" style="
+    display:none;
+    position:fixed;inset:0;
+    background:rgba(0,0,0,.6);
+    z-index:2000;
+    align-items:center;
+    justify-content:center;
+    padding:1rem;
+">
+    <div style="
+        background:white;
+        border-radius:20px;
+        max-width:560px;
+        width:100%;
+        overflow:hidden;
+        box-shadow:0 20px 60px rgba(0,0,0,.3);
+    " id="modalContent">
+        <!-- Filled by JS -->
+    </div>
+</div>
+
+<!-- CART SIDEBAR -->
+<div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+<div class="cart-sidebar" id="cartSidebar">
+    <div class="cart-header">
+        <h3>🛒 Your Cart</h3>
+        <button class="cart-close-btn" onclick="toggleCart()">✕</button>
+    </div>
+    <div class="cart-items" id="cartItemsList"></div>
+    <div class="cart-footer" id="cartFooter">
+        <div class="cart-subtotal">
+            <span>Subtotal</span>
+            <span id="cartSubtotal">₱0.00</span>
+        </div>
+        <div class="cart-total">
+            <span>Total</span>
+            <span id="cartTotal">₱0.00</span>
+        </div>
+        <a href="checkout.html" class="btn btn-primary" style="width:100%;justify-content:center;">
+            Proceed to Checkout →
+        </a>
+    </div>
+</div>
+
+<!-- Toast -->
+<div class="toast-container" id="toastContainer"></div>
+
+<script src="js/cart.js"></script>
+<script src="js/products.js"></script>
+<script src="js/main.js"></script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        loadMenuProducts();
+        updateCartUI();
+
+        // Check if URL has a category param (e.g., from footer links)
+        const params = new URLSearchParams(window.location.search);
+        const cat = params.get('category');
+        if (cat) {
+            // Activate the correct filter button
+            const btns = document.querySelectorAll('.filter-btn');
+            btns.forEach(b => {
+                if (b.textContent.trim().includes(cat)) {
+                    b.classList.add('active');
+                    filterProducts(cat, b);
+                } else {
+                    b.classList.remove('active');
+                }
+            });
+        }
+    });
+</script>
+
+</body>
+</html>
